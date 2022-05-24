@@ -42,7 +42,7 @@ android {
 	compileSdkVersion 31
 
 	defaultConfig {
-		applicationId "com.netfuze.ssh"
+//		applicationId "com.netfuze.ssh"
 //		versionName androidGitVersion.name()
 //		versionCode androidGitVersion.code()
 		versionName "1.0.0"
@@ -91,7 +91,7 @@ android {
 		}
 
 		debug {
-			applicationIdSuffix ".debug"
+//			applicationIdSuffix ".debug"
 			testCoverageEnabled true
 		}
 	}
