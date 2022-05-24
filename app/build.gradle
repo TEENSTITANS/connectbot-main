@@ -264,7 +264,30 @@ dependencies {
 	testImplementation 'org.assertj:assertj-core:3.22.0'
 	testImplementation 'org.robolectric:robolectric:4.8.1'
 
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10"
+
 	errorprone "com.google.errorprone:error_prone_core:2.13.1"
 	errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
 }
 
+//afterEvaluate {
+//	publishing {
+//		publications {
+//			mavenJava(MavenPublication) {
+//				from components.java
+//				groupId = 'com.github.jitpack'
+//				artifactId = 'connetbot-main'
+//				version = '1.0.0'
+//			}
+//		}
+//		publications {
+//			// Creates a Maven publication called "release".
+//			release(MavenPublication) {
+//				from components.java
+//				groupId = 'com.github.jitpack'
+//				artifactId = 'connetbot-main'
+//				version = '1.0'
+//			}
+//		}
+//	}
+//}
