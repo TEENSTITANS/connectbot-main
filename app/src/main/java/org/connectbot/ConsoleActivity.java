@@ -49,7 +49,9 @@ import android.os.IBinder;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.viewpager.widget.PagerAdapter;
@@ -135,7 +137,7 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 	private MenuItem disconnect;
 	private MenuItem paste;
 	private MenuItem portForward;
-//	private MenuItem resize;
+	//	private MenuItem resize;
 	private MenuItem urlscan;
 
 	private boolean forcedOrientation;
@@ -146,7 +148,8 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 
 	private ImageView mKeyboardButton;
 
-	@Nullable private ActionBar actionBar;
+	@Nullable
+	private ActionBar actionBar;
 	private boolean inActionBarMenu = false;
 	private boolean titleBarHide;
 	private boolean keyboardAlwaysVisible = false;
@@ -299,85 +302,58 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		TerminalKeyListener handler = terminal.bridge.getKeyHandler();
 		boolean hideKeys = false;
 
-		switch (v.getId()) {
-		case R.id.button_ctrl:
+		int id = v.getId();
+		if (id == R.id.button_ctrl) {
 			handler.metaPress(TerminalKeyListener.OUR_CTRL_ON, true);
 			hideKeys = true;
-			break;
-		case R.id.button_esc:
+		} else if (id == R.id.button_esc) {
 			handler.sendEscape();
 			hideKeys = true;
-			break;
-		case R.id.button_tab:
+		} else if (id == R.id.button_tab) {
 			handler.sendTab();
 			hideKeys = true;
-			break;
-
-		case R.id.button_up:
+		} else if (id == R.id.button_up) {
 			handler.sendPressedKey(vt320.KEY_UP);
-			break;
-		case R.id.button_down:
+		} else if (id == R.id.button_down) {
 			handler.sendPressedKey(vt320.KEY_DOWN);
-			break;
-		case R.id.button_left:
+		} else if (id == R.id.button_left) {
 			handler.sendPressedKey(vt320.KEY_LEFT);
-			break;
-		case R.id.button_right:
+		} else if (id == R.id.button_right) {
 			handler.sendPressedKey(vt320.KEY_RIGHT);
-			break;
-
-		case R.id.button_home:
+		} else if (id == R.id.button_home) {
 			handler.sendPressedKey(vt320.KEY_HOME);
-			break;
-		case R.id.button_end:
+		} else if (id == R.id.button_end) {
 			handler.sendPressedKey(vt320.KEY_END);
-			break;
-		case R.id.button_pgup:
+		} else if (id == R.id.button_pgup) {
 			handler.sendPressedKey(vt320.KEY_PAGE_UP);
-			break;
-		case R.id.button_pgdn:
+		} else if (id == R.id.button_pgdn) {
 			handler.sendPressedKey(vt320.KEY_PAGE_DOWN);
-			break;
-
-		case R.id.button_f1:
+		} else if (id == R.id.button_f1) {
 			handler.sendPressedKey(vt320.KEY_F1);
-			break;
-		case R.id.button_f2:
+		} else if (id == R.id.button_f2) {
 			handler.sendPressedKey(vt320.KEY_F2);
-			break;
-		case R.id.button_f3:
+		} else if (id == R.id.button_f3) {
 			handler.sendPressedKey(vt320.KEY_F3);
-			break;
-		case R.id.button_f4:
+		} else if (id == R.id.button_f4) {
 			handler.sendPressedKey(vt320.KEY_F4);
-			break;
-		case R.id.button_f5:
+		} else if (id == R.id.button_f5) {
 			handler.sendPressedKey(vt320.KEY_F5);
-			break;
-		case R.id.button_f6:
+		} else if (id == R.id.button_f6) {
 			handler.sendPressedKey(vt320.KEY_F6);
-			break;
-		case R.id.button_f7:
+		} else if (id == R.id.button_f7) {
 			handler.sendPressedKey(vt320.KEY_F7);
-			break;
-		case R.id.button_f8:
+		} else if (id == R.id.button_f8) {
 			handler.sendPressedKey(vt320.KEY_F8);
-			break;
-		case R.id.button_f9:
+		} else if (id == R.id.button_f9) {
 			handler.sendPressedKey(vt320.KEY_F9);
-			break;
-		case R.id.button_f10:
+		} else if (id == R.id.button_f10) {
 			handler.sendPressedKey(vt320.KEY_F10);
-			break;
-		case R.id.button_f11:
+		} else if (id == R.id.button_f11) {
 			handler.sendPressedKey(vt320.KEY_F11);
-			break;
-		case R.id.button_f12:
+		} else if (id == R.id.button_f12) {
 			handler.sendPressedKey(vt320.KEY_F12);
-			break;
-		default:
+		} else {
 			Log.e(TAG, "Unknown emulated key clicked: " + v.getId());
-			break;
 		}
 
 		if (hideKeys) {
@@ -628,9 +604,9 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 				if (terminal == null)
 					return;
 				InputMethodManager inputMethodManager =
-					(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+						(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				inputMethodManager.toggleSoftInputFromWindow(terminal.getApplicationWindowToken(),
-					InputMethodManager.SHOW_FORCED, 0);
+						InputMethodManager.SHOW_FORCED, 0);
 				terminal.requestFocus();
 				hideEmulatedKeys();
 			}
@@ -738,24 +714,24 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		// How to detect keyboard visibility: http://stackoverflow.com/q/4745988
 		contentView = findViewById(android.R.id.content);
 		contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					Rect r = new Rect();
-					contentView.getWindowVisibleDisplayFrame(r);
-					int screenHeight = contentView.getRootView().getHeight();
-					int keypadHeight = screenHeight - r.bottom;
+			@Override
+			public void onGlobalLayout() {
+				Rect r = new Rect();
+				contentView.getWindowVisibleDisplayFrame(r);
+				int screenHeight = contentView.getRootView().getHeight();
+				int keypadHeight = screenHeight - r.bottom;
 
-					if (keypadHeight > screenHeight * 0.15) {
-						// keyboard is opened
-						mKeyboardButton.setImageResource(R.drawable.ic_keyboard_hide);
-						mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_hide_keyboard));
-					} else {
-						// keyboard is closed
-						mKeyboardButton.setImageResource(R.drawable.ic_keyboard);
-						mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_show_keyboard));
-					}
+				if (keypadHeight > screenHeight * 0.15) {
+					// keyboard is opened
+					mKeyboardButton.setImageResource(R.drawable.ic_keyboard_hide);
+					mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_hide_keyboard));
+				} else {
+					// keyboard is closed
+					mKeyboardButton.setImageResource(R.drawable.ic_keyboard);
+					mKeyboardButton.setContentDescription(getResources().getText(R.string.image_description_show_keyboard));
 				}
-			});
+			}
+		});
 	}
 
 	private void addKeyRepeater(View view) {
@@ -916,46 +892,44 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		});
 
 		/**
-		resize = menu.add(R.string.console_menu_resize);
-		if (hardKeyboard)
-			resize.setAlphabeticShortcut('s');
-		resize.setIcon(android.R.drawable.ic_menu_crop);
-		resize.setEnabled(sessionOpen);
-		resize.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				final TerminalView terminalView = adapter.getCurrentTerminalView();
+		 resize = menu.add(R.string.console_menu_resize);
+		 if (hardKeyboard)
+		 resize.setAlphabeticShortcut('s');
+		 resize.setIcon(android.R.drawable.ic_menu_crop);
+		 resize.setEnabled(sessionOpen);
+		 resize.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		@Override public boolean onMenuItemClick(MenuItem item) {
+		final TerminalView terminalView = adapter.getCurrentTerminalView();
 
-				@SuppressLint("InflateParams")  // Dialogs do not have a parent view.
-				final View resizeView = inflater.inflate(R.layout.dia_resize, null, false);
-				new androidx.appcompat.app.AlertDialog.Builder(
-								ConsoleActivity.this, R.style.AlertDialogTheme)
-						.setView(resizeView)
-						.setPositiveButton(R.string.button_resize, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								int width, height;
-								try {
-									width = Integer.parseInt(((EditText) resizeView
-											.findViewById(R.id.width))
-											.getText().toString());
-									height = Integer.parseInt(((EditText) resizeView
-											.findViewById(R.id.height))
-											.getText().toString());
-								} catch (NumberFormatException nfe) {
-									// TODO change this to a real dialog where we can
-									// make the input boxes turn red to indicate an error.
-									return;
-								}
+		@SuppressLint("InflateParams")  // Dialogs do not have a parent view.
+		final View resizeView = inflater.inflate(R.layout.dia_resize, null, false);
+		new androidx.appcompat.app.AlertDialog.Builder(
+		ConsoleActivity.this, R.style.AlertDialogTheme)
+		.setView(resizeView)
+		.setPositiveButton(R.string.button_resize, new DialogInterface.OnClickListener() {
+		@Override public void onClick(DialogInterface dialog, int which) {
+		int width, height;
+		try {
+		width = Integer.parseInt(((EditText) resizeView
+		.findViewById(R.id.width))
+		.getText().toString());
+		height = Integer.parseInt(((EditText) resizeView
+		.findViewById(R.id.height))
+		.getText().toString());
+		} catch (NumberFormatException nfe) {
+		// TODO change this to a real dialog where we can
+		// make the input boxes turn red to indicate an error.
+		return;
+		}
 
-								terminalView.forceSize(width, height);
-							}
-						}).setNegativeButton(android.R.string.cancel, null).create().show();
+		terminalView.forceSize(width, height);
+		}
+		}).setNegativeButton(android.R.string.cancel, null).create().show();
 
-				return true;
-			}
+		return true;
+		}
 		});
-		*/
+		 */
 
 		return true;
 	}
