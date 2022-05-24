@@ -28,6 +28,7 @@ ext {
 }
 
 //apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 apply plugin: 'com.diffplug.spotless'
 apply from: '../config/quality.gradle'
 
