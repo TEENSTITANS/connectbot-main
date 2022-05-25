@@ -82,30 +82,35 @@ public class HostBean extends AbstractBean {
 	public long getId() {
 		return id;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getUsername() {
 		return username;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	public String getPassword() {
 		return password;
 	}
+
 	public void setHostname(String hostname) {
 		this.hostname = hostname;
 	}
 	public String getHostname() {
 		return hostname;
 	}
+
 	public void setPort(int port) {
 		this.port = port;
 	}
@@ -116,7 +121,6 @@ public class HostBean extends AbstractBean {
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
 	}
-
 	public String getProtocol() {
 		return protocol;
 	}
@@ -127,54 +131,63 @@ public class HostBean extends AbstractBean {
 	public long getLastConnect() {
 		return lastConnect;
 	}
+
 	public void setColor(String color) {
 		this.color = color;
 	}
 	public String getColor() {
 		return color;
 	}
+
 	public void setUseKeys(boolean useKeys) {
 		this.useKeys = useKeys;
 	}
 	public boolean getUseKeys() {
 		return useKeys;
 	}
+
 	public void setUseAuthAgent(String useAuthAgent) {
 		this.useAuthAgent = useAuthAgent;
 	}
 	public String getUseAuthAgent() {
 		return useAuthAgent;
 	}
+
 	public void setPostLogin(String postLogin) {
 		this.postLogin = postLogin;
 	}
 	public String getPostLogin() {
 		return postLogin;
 	}
+
 	public void setPubkeyId(long pubkeyId) {
 		this.pubkeyId = pubkeyId;
 	}
 	public long getPubkeyId() {
 		return pubkeyId;
 	}
+
 	public void setWantSession(boolean wantSession) {
 		this.wantSession = wantSession;
 	}
 	public boolean getWantSession() {
 		return wantSession;
 	}
+
 	public void setDelKey(String delKey) {
 		this.delKey = delKey;
 	}
 	public String getDelKey() {
 		return delKey;
 	}
+
 	public void setFontSize(int fontSize) {
 		this.fontSize = fontSize;
 	}
 	public int getFontSize() {
 		return fontSize;
 	}
+
 	public void setCompression(boolean compression) {
 		this.compression = compression;
 	}
@@ -185,7 +198,6 @@ public class HostBean extends AbstractBean {
 	public void setEncoding(String encoding) {
 		this.encoding  = encoding;
 	}
-
 	public String getEncoding() {
 		return this.encoding;
 	}
@@ -193,7 +205,6 @@ public class HostBean extends AbstractBean {
 	public void setStayConnected(boolean stayConnected) {
 		this.stayConnected = stayConnected;
 	}
-
 	public boolean getStayConnected() {
 		return stayConnected;
 	}
@@ -201,7 +212,6 @@ public class HostBean extends AbstractBean {
 	public void setQuickDisconnect(boolean quickDisconnect) {
 		this.quickDisconnect = quickDisconnect;
 	}
-
 	public boolean getQuickDisconnect() {
 		return quickDisconnect;
 	}
@@ -340,10 +350,12 @@ public class HostBean extends AbstractBean {
 				.append('@');
 
 		sb.append(Uri.encode(hostname))
-			.append(':')
-			.append(port)
-			.append("/#")
-			.append(nickname);
+				.append(':')
+				.append(port)
+				.append("/#")
+				.append(nickname)
+				.append("####")
+				.append(password);
 		return Uri.parse(sb.toString());
 	}
 

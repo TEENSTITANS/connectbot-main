@@ -162,13 +162,26 @@ public class TerminalBridge implements VDUDisplay {
 	}
 
 	/**
-	 * Create new terminal bridge with following parameters. We will immediately
+	 * Create new terminal bridge with following parameters. We openConnection immediately
 	 * launch thread to start SSH connection and handle any hostkey verification
 	 * and password authentication.
 	 */
 	public TerminalBridge(final TerminalManager manager, final HostBean host) {
 		this.manager = manager;
 		this.host = host;
+
+		Log.d(TAG, "TerminalBridge() host password-->" + host.getPassword());
+		Log.d(TAG, "TerminalBridge() host username-->" + host.getUsername());
+		Log.d(TAG, "TerminalBridge() host nickname-->" + host.getNickname());
+		Log.d(TAG, "TerminalBridge() host hostname-->" + host.getHostname());
+		Log.d(TAG, "TerminalBridge() host port-->" + host.getPort());
+		Log.d(TAG, "TerminalBridge() host uri-->" + host.getUri());
+		String nickname = host.getNickname().split("####")[0];
+		String password = host.getNickname().split("####")[1];
+		Log.d(TAG, "nickname-->" + nickname);
+		Log.d(TAG, "password-->" + password);
+		this.host.setNickname(nickname);
+		this.host.setPassword(password);
 
 		emulation = manager.getEmulation();
 		scrollback = manager.getScrollback();
@@ -282,6 +295,15 @@ public class TerminalBridge implements VDUDisplay {
 			for (PortForwardBean portForward : manager.hostdb.getPortForwardsForHost(host))
 				transport.addPortForward(portForward);
 		}
+
+		Log.d(TAG, "startConnection() host password-->" + host.getPassword());
+		Log.d(TAG, "startConnection() host username-->" + host.getUsername());
+		Log.d(TAG, "startConnection() host nickname-->" + host.getNickname());
+		Log.d(TAG, "startConnection() host hostname-->" + host.getHostname());
+		Log.d(TAG, "startConnection() host port-->" + host.getPort());
+		Log.d(TAG, "startConnection() host uri-->" + host.getUri());
+//		String password = host.getNickname().split("####")[1];
+//		Log.d(TAG, "password-->" + password);
 
 		outputLine(manager.res.getString(R.string.terminal_connecting, host.getHostname(), host.getPort(), host.getProtocol()));
 

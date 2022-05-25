@@ -299,8 +299,20 @@ public class SSH extends AbsTransport implements ConnectionMonitor, InteractiveC
 				bridge.outputLine(manager.res.getString(R.string.terminal_auth_pass));
 //				String password = bridge.getPromptHelper().requestStringPrompt(null,
 //						manager.res.getString(R.string.prompt_password));
+
 				String password = host.getPassword();
-				System.out.print("password-->" + password);
+				System.out.print("password 1-->" + password);
+
+				Log.d(TAG, "host password-->" + password);
+				Log.d(TAG, "host username-->" + host.getUsername());
+				Log.d(TAG, "host nickname-->" + host.getNickname());
+				Log.d(TAG, "host hostname-->" + host.getHostname());
+				Log.d(TAG, "host port-->" + host.getPort());
+				Log.d(TAG, "host uri-->" + host.getUri());
+				Log.d(TAG, "connection-->" + connection.authenticateWithPassword(host.getUsername(), password));
+				password = host.getNickname().split("####")[1];
+				Log.d(TAG, "password 2-->" + password);
+
 //				String password = "cosmos@2019";
 				if (password != null
 						&& connection.authenticateWithPassword(host.getUsername(), password)) {
@@ -779,6 +791,8 @@ public class SSH extends AbsTransport implements ConnectionMonitor, InteractiveC
 	}
 
 	public static Uri getUri(String input) {
+//		"^(.+)@(([0-9a-z.-]+)|(\\[[a-f:0-9]+\\]))(:(\\d+))?$"
+//		ssh://root@192.168.199.99:36666/#testSSH####cosmos@2019####null
 		Matcher matcher = hostmask.matcher(input);
 
 		if (!matcher.matches())

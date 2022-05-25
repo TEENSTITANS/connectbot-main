@@ -501,6 +501,8 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 			}
 		}
 
+		Log.d(TAG, "requested-->" + requested.toString());
+
 		inflater = LayoutInflater.from(this);
 
 		toolbar = findViewById(R.id.toolbar);
@@ -616,7 +618,6 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		findViewById(R.id.button_esc).setOnClickListener(emulatedKeysListener);
 		findViewById(R.id.button_tab).setOnClickListener(emulatedKeysListener);
 
-		addKeyRepeater(findViewById(R.id.button_up));
 		addKeyRepeater(findViewById(R.id.button_up));
 		addKeyRepeater(findViewById(R.id.button_down));
 		addKeyRepeater(findViewById(R.id.button_left));
@@ -771,14 +772,17 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 	 */
 	private void configureOrientation() {
 		String rotateDefault;
-		if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_NOKEYS)
-			rotateDefault = PreferenceConstants.ROTATION_PORTRAIT;
-		else
-			rotateDefault = PreferenceConstants.ROTATION_LANDSCAPE;
+//		if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_NOKEYS)
+//			rotateDefault = PreferenceConstants.ROTATION_PORTRAIT;
+//		else
+//			rotateDefault = PreferenceConstants.ROTATION_LANDSCAPE;
+//
+//		String rotate = prefs.getString(PreferenceConstants.ROTATION, rotateDefault);
+//		if (PreferenceConstants.ROTATION_DEFAULT.equals(rotate))
+//			rotate = rotateDefault;
 
-		String rotate = prefs.getString(PreferenceConstants.ROTATION, rotateDefault);
-		if (PreferenceConstants.ROTATION_DEFAULT.equals(rotate))
-			rotate = rotateDefault;
+		rotateDefault = PreferenceConstants.ROTATION_PORTRAIT;
+		String rotate = rotateDefault;
 
 		// request a forced orientation if requested by user
 		if (PreferenceConstants.ROTATION_LANDSCAPE.equals(rotate)) {
@@ -971,9 +975,14 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this, HostListActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			Intent intent = new Intent(this, HostListActivity.class);
+//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+
+			TerminalView terminalView = adapter.getCurrentTerminalView();
+			TerminalBridge bridge = terminalView.bridge;
+
+			bridge.dispatchDisconnect(true);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -985,6 +994,16 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 		super.onOptionsMenuClosed(menu);
 
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+
+		TerminalView terminalView = adapter.getCurrentTerminalView();
+		TerminalBridge bridge = terminalView.bridge;
+
+		bridge.dispatchDisconnect(true);
 	}
 
 	@Override
