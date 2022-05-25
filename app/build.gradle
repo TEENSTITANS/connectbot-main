@@ -32,6 +32,9 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.diffplug.spotless'
 apply from: '../config/quality.gradle'
 
+//apply plugin: 'com.github.dcendents.android-maven'
+//group = 'com.github.TEENSTITANS'
+
 coveralls.jacocoReportPath = 'build/reports/coverage/google/debug/report.xml'
 
 androidGitVersion {
@@ -77,6 +80,7 @@ android {
 			}
 		}
 	}
+
 	buildTypes {
 		release {
 //			shrinkResources true
@@ -273,8 +277,8 @@ dependencies {
 //afterEvaluate {
 //	publishing {
 //		publications {
-//			mavenJava(MavenPublication) {
-//				from components.java
+//			ossRelease(MavenPublication) {
+//				from components.ossRelease
 //				groupId = 'com.github.jitpack'
 //				artifactId = 'connetbot-main'
 //				version = '1.0.0'

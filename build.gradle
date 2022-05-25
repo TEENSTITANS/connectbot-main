@@ -1,6 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+
+	dependencies {
+		classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
+	}
+
 	project.ext.MAVEN_REPO_CACHE = System.getenv("MAVEN_REPO_CACHE")?.trim()
 	project.ext.TRANSLATIONS_ONLY = System.getenv("TRANSLATIONS_ONLY")?.trim()
 	if (MAVEN_REPO_CACHE) {
