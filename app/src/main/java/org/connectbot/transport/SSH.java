@@ -309,9 +309,7 @@ public class SSH extends AbsTransport implements ConnectionMonitor, InteractiveC
 				Log.d(TAG, "host hostname-->" + host.getHostname());
 				Log.d(TAG, "host port-->" + host.getPort());
 				Log.d(TAG, "host uri-->" + host.getUri());
-				Log.d(TAG, "connection-->" + connection.authenticateWithPassword(host.getUsername(), password));
-				password = host.getNickname().split("####")[1];
-				Log.d(TAG, "password 2-->" + password);
+//				Log.d(TAG, "connection-->" + connection.authenticateWithPassword(host.getUsername(), password));
 
 //				String password = "cosmos@2019";
 				if (password != null

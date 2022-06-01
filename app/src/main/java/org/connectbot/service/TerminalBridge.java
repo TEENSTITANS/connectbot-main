@@ -41,6 +41,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -180,6 +181,8 @@ public class TerminalBridge implements VDUDisplay {
 		String password = host.getNickname().split("####")[1];
 		Log.d(TAG, "nickname-->" + nickname);
 		Log.d(TAG, "password-->" + password);
+//		TerminalBridge() host uri-->ssh://root@192.168.199.99:36666/#testSSH####cosmos@2019####null
+
 		this.host.setNickname(nickname);
 		this.host.setPassword(password);
 

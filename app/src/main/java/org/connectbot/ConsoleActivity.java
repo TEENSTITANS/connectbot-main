@@ -29,6 +29,9 @@ import org.connectbot.service.TerminalKeyListener;
 import org.connectbot.service.TerminalManager;
 import org.connectbot.util.PreferenceConstants;
 import org.connectbot.util.TerminalViewPager;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -493,7 +496,24 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 
 		// handle requested console from incoming intent
 		if (icicle == null) {
-			requested = getIntent().getData();
+//			requested = getIntent().getData();
+
+			String arguments = getIntent().getStringExtra("arguments");
+			Log.d(TAG, arguments);
+			try {
+				JSONObject jsonObject = new JSONObject(arguments);
+				HostBean host = new HostBean();
+				host.setNickname(jsonObject.get("nickname").toString());
+				host.setUsername(jsonObject.get("username").toString());
+				host.setHostname(jsonObject.get("hostname").toString());
+				host.setPort(Integer.parseInt(jsonObject.get("port").toString()));
+				host.setPassword(jsonObject.get("password").toString());
+				host.setProtocol("ssh");
+				requested = host.getUri();
+				Log.d(TAG, requested.toString());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		} else {
 			String uri = icicle.getString(STATE_SELECTED_URI);
 			if (uri != null) {
