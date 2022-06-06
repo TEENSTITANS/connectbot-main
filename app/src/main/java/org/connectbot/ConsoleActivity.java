@@ -390,12 +390,11 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 	}
 
 	private void unregisterMenuListeners() {
-		portForward.setOnMenuItemClickListener(null);
 		disconnect.setOnMenuItemClickListener(null);
 		paste.setOnMenuItemClickListener(null);
-		portForward.setOnMenuItemClickListener(null);
+//		portForward.setOnMenuItemClickListener(null);
 //		resize.setOnMenuItemClickListener(null);
-		urlscan.setOnMenuItemClickListener(null);
+//		urlscan.setOnMenuItemClickListener(null);
 	}
 
 	protected View findCurrentView(int id) {
@@ -870,6 +869,7 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 			}
 		});
 
+		/**
 		portForward = menu.add(R.string.console_menu_portforwards);
 		if (hardKeyboard)
 			portForward.setAlphabeticShortcut('f');
@@ -887,7 +887,9 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 				return true;
 			}
 		});
+		*/
 
+		/**
 		urlscan = menu.add(R.string.console_menu_urlscan);
 		if (hardKeyboard)
 			urlscan.setAlphabeticShortcut('u');
@@ -914,6 +916,7 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 				return true;
 			}
 		});
+		*/
 
 		/**
 		 resize = menu.add(R.string.console_menu_resize);
@@ -984,8 +987,8 @@ public class ConsoleActivity extends AppCompatActivity implements BridgeDisconne
 			disconnect.setTitle(R.string.console_menu_close);
 
 		paste.setEnabled(activeTerminal);
-		portForward.setEnabled(sessionOpen && canForwardPorts);
-		urlscan.setEnabled(activeTerminal);
+//		portForward.setEnabled(sessionOpen && canForwardPorts);
+//		urlscan.setEnabled(activeTerminal);
 //		resize.setEnabled(sessionOpen);
 
 		return true;
